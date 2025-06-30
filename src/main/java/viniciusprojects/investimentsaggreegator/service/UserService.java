@@ -35,10 +35,12 @@ public class UserService {
     }
 
     public void deleteUserById(String userId){
-        var entity = userRepository.findById(UUID.fromString(userId));
 
-        if(entity.isPresent()){
-            userRepository.deleteById(UUID.fromString(userId));
+        var id = UUID.fromString(userId);
+        var userExists = userRepository.existsById(id);
+
+        if(userExists){
+            userRepository.deleteById(id);
         }
 
     }
